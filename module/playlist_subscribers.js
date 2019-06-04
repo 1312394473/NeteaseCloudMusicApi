@@ -1,15 +1,12 @@
-// 用户动态
-
 module.exports = (query, request) => {
   const data = {
-    getcounts: true,
-    time: query.lasttime || -1,
-    limit: query.limit || 30,
-    total: false
+    id: query.id,
+    limit: query.limit || 20,
+    offset: query.offset || 0
   };
   return request(
     "POST",
-    `https://music.163.com/weapi/event/get/${query.uid}`,
+    `https://music.163.com/weapi/playlist/subscribers`,
     data,
     { crypto: "weapi", cookie: query.cookie, proxy: query.proxy }
   );

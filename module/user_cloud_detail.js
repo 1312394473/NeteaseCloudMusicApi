@@ -1,15 +1,13 @@
-// 用户动态
+// 云盘数据详情
 
 module.exports = (query, request) => {
+  const id = query.id.replace(/\s/g, "").split(",");
   const data = {
-    getcounts: true,
-    time: query.lasttime || -1,
-    limit: query.limit || 30,
-    total: false
+    songIds: id
   };
   return request(
     "POST",
-    `https://music.163.com/weapi/event/get/${query.uid}`,
+    `https://music.163.com/weapi/v1/cloud/get/byids`,
     data,
     { crypto: "weapi", cookie: query.cookie, proxy: query.proxy }
   );
